@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Historic Sites <img src="/images/image.png" alt="Canadian Flag" class="w-16 h-10">
+    </title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body class="bg-base-200"><!-- views/addSite.ejs -->
+<%- include('partials/navbar', { page: '/addSite' }) %>
+
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+        <div class="max-w-lg">
+            <h1 class="text-5xl font-bold">Add Site</h1>
+            <p class="py-6">Use the form below to add a new site to the collection.</p>
+            <form action="/addSite" method="POST">
+                <div class="form-control">
+                    <label for="siteId" class="label">
+                        <span class="label-text">Site ID</span>
+                    </label>
+                    <input type="text" id="siteId" name="siteId" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="site" class="label">
+                        <span class="label-text">Site Name</span>
+                    </label>
+                    <input type="text" id="site" name="site" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="image" class="label">
+                        <span class="label-text">Image URL</span>
+                    </label>
+                    <input type="url" id="image" name="image" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="date" class="label">
+                        <span class="label-text">Date</span>
+                    </label>
+                    <input type="number" id="date" name="date" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="dateType" class="label">
+                        <span class="label-text">Date Type</span>
+                    </label>
+                    <input type="text" id="dateType" name="dateType" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="designated" class="label">
+                        <span class="label-text">Designated</span>
+                    </label>
+                    <input type="number" id="designated" name="designated" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="location" class="label">
+                        <span class="label-text">Location</span>
+                    </label>
+                    <input type="text" id="location" name="location" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label for="provinceOrTerritoryCode" class="label">
+                        <span class="label-text">Province/Territory</span>
+                    </label>
+                    <select id="provinceOrTerritoryCode" name="provinceOrTerritoryCode" required class="select select-bordered">
+                        <% provincesAndTerritories.forEach(provinceOrTerritory => { %>
+                            <option value="<%= provinceOrTerritory.code %>">
+                                <%= provinceOrTerritory.name %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label for="description" class="label">
+                        <span class="label-text">Description</span>
+                    </label>
+                    <textarea id="description" name="description" class="textarea textarea-bordered" rows="3"></textarea>
+                </div>
+
+                <div class="form-control">
+                    <label for="latitude" class="label">
+                        <span class="label-text">Latitude</span>
+                    </label>
+                    <input type="number" id="latitude" name="latitude" step="0.00000001" required class="input input-bordered" />
+                </div> 
+
+                <div class="form-control">
+                    <label for="longitude" class="label">
+                        <span class="label-text">Longitude</span>
+                    </label>
+                    <input type="number" id="longitude" name="longitude" step="0.00000001" required class="input input-bordered" />
+                </div>
+
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= site.site %> - Site Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css" type="text/css" />
+</head>
+<body><!-- views/editSite.ejs -->
+<%- include('partials/navbar', {page: '' }) %>
+
+<div class="hero bg-primary text-white py-12">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+            <h1 class="text-3xl font-semibold">Edit Site: <%= site.site %></h1>
+            <form action="/editSite" method="POST" class="space-y-6">
+                <!-- Site ID (readonly) -->
+                <div class="form-control">
+                    <label for="siteId" class="label">Site ID</label>
+                    <input type="text" id="siteId" name="siteId" value="<%= site.siteId %>" class="input input-bordered w-full" readonly="readonly" 
+                        class="bg-gray-100 cursor-not-allowed">
+                </div>
+
+                <!-- Site Name -->
+                <div class="form-control">
+                    <label for="site" class="label">Site Name</label>
+                    <input type="text" id="site" name="site" value="<%= site.site %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Description -->
+                <div class="form-control">
+                    <label for="description" class="label">Description</label>
+                    <textarea id="description" name="description" class="textarea textarea-bordered w-full" required><%= site.description %></textarea>
+                </div>
+
+                <!-- Date -->
+                <div class="form-control">
+                    <label for="date" class="label">Date</label>
+                    <input type="number" id="date" name="date" value="<%= site.date %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Date Type -->
+                <div class="form-control">
+                    <label for="dateType" class="label">Date Type</label>
+                    <input type="text" id="dateType" name="dateType" value="<%= site.dateType %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Image -->
+                <div class="form-control">
+                    <label for="image" class="label">Image URL</label>
+                    <input type="text" id="image" name="image" value="<%= site.image %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Location -->
+                <div class="form-control">
+                    <label for="location" class="label">Location</label>
+                    <input type="text" id="location" name="location" value="<%= site.location %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Latitude -->
+                <div class="form-control">
+                    <label for="latitude" class="label">Latitude</label>
+                    <input type="number" step="any" id="latitude" name="latitude" value="<%= site.latitude %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Longitude -->
+                <div class="form-control">
+                    <label for="longitude" class="label">Longitude</label>
+                    <input type="number" step="any" id="longitude" name="longitude" value="<%= site.longitude %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Designated -->
+                <div class="form-control">
+                    <label for="designated" class="label">Designated</label>
+                    <input type="number" id="designated" name="designated" value="<%= site.designated %>" class="input input-bordered w-full" required>
+                </div>
+
+                <!-- Province or Territory -->
+                <div class="form-control">
+                    <label for="provinceOrTerritoryCode" class="label">Province or Territory</label>
+                    <select id="provinceOrTerritoryCode" name="provinceOrTerritoryCode" class="select select-bordered w-full" required>
+                        <% provincesAndTerritories.forEach(provOrTerr => { %>
+                            <option value="<%= provOrTerr.code %>" <%= site.provinceOrTerritoryCode === provOrTerr.code ? 'selected' : '' %>>
+                                <%= provOrTerr.name %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+ 
+                <!-- Submit Button -->
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary w-full">Update Site</button>
+                </div>
+            </form>
+
+            <!-- Delete Site Button -->
+            <form action="/deleteSite/<%= site.siteId %>" method="GET" class="mt-6">
+                <button type="submit" class="btn btn-error w-full">Delete Site</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
